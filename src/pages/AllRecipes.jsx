@@ -32,16 +32,6 @@ const AllRecipes = () => {
             <article key={recipe.idMeal}>
             <h2>{recipe.strMeal}</h2>
             <img src={recipe.strMealThumb} alt={recipe.strMeal} />
-            <p>{recipe.strInstructions}</p>
-            <ul>
-                {Object.keys(recipe)
-                    .filter(key => key.startsWith('strIngredient') && recipe[key])
-                    .map((key, index) => (
-                        <li key={index}>
-                            {recipe[key]} - {recipe[`strMeasure${index + 1}`]}
-                        </li>
-                    ))}
-            </ul>
         </article>
           ))}
         <Footer/>
