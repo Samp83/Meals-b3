@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Header from '../component/Header';
 import Footer from '../component/Footer';
+import { Link } from 'react-router-dom';
 
 
 const AllRecipes = () => {
@@ -32,6 +33,9 @@ const AllRecipes = () => {
             <article key={recipe.idMeal}>
             <h2>{recipe.strMeal}</h2>
             <img src={recipe.strMealThumb} alt={recipe.strMeal} />
+            <br></br>
+            <Link to={"/Recipe/"+recipe.idMeal}>Voir la recette</Link>
+
         </article>
           ))}
         <Footer/>

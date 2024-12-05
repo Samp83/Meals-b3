@@ -8,6 +8,7 @@ import Contact from './pages/Contact'
 import RandomRecipes from './pages/RandomRecipe'
 import AllRecipes from './pages/AllRecipes'
 import ShowMealPage from './pages/ShowMealPage'
+import MealsSearchResults from './pages/searchResults'
 
 function App() {
 
@@ -19,6 +20,7 @@ function App() {
         <Route path="/randomRecipe" element={<RandomRecipes />} />
         <Route path="/allRecipes" element={<AllRecipes />} />
         <Route path="/Recipe/:id" element={<ShowMealPage />} />
+        <Route path="/search-results/" element={<MealsSearchResults />} />
       </Routes>
     </BrowserRouter>
   

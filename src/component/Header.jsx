@@ -1,5 +1,13 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import MealsSearchResults from "../pages/searchResults";
 const Header = () => {
+    const navigate = useNavigate();
+    
+    const HandleSubmitSearch = (event) =>{
+      event.preventDefault();
+      const query = event.target.query.value; 
+      navigate("/search-results?query=" + query) 
+    };
     return (
         <>
             <header>
@@ -19,8 +27,16 @@ const Header = () => {
                     <Link to="/randomRecipe">Recette Aléatoire</Link>
                 </li>
             </ul>
+            <form method="get" onSubmit={HandleSubmitSearch}>
+          <label>
+            Recherche :
+            <input type="text" name="query" />
+          </label>
+
+          <input type="submit" />
+        </form>
         </>
     )
 }
-Header();
+
 export default Header;
