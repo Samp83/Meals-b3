@@ -2,30 +2,31 @@ import Header from "../component/Header";
 import Footer from "../component/Footer";
 import { useState, useEffect } from 'react'
 import { Link } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
+import  useGetMeals  from "../hooks/useGetMeals";
 const MealsSearchResults = () =>{
-    const search = window.location.search;
-    const params = new URLSearchParams(search);
-    const query = params.get('query');
-    const [recipe, setRecipe] = useState([]);
-
-    const fetchRecipe = async () => {
-        const response = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=' +query);
-        const data = await response.json();
-        setRecipe(data.meals);
-    };
+    const [searchParams] = useSearchParams();
+    const query = searchParams.get('query');
+    const { recipes, loading } = useGetMeals(query);
   
-    useEffect(() => {
-        fetchRecipe();
-    }, [query]);
-  
-    if (!recipe) {
+    if (loading) {
         return <main>En attente</main>;
     };
+
+    if (!loading && !recipes) {
+        return (
+            <> 
+            <Header />
+            <main>Aucun résultat</main>;
+            <Footer />
+            </>
+            );
+    }
     return (
         <>
         <Header />
             <h1>Recherche pour {query}</h1>
-            {recipe.map((recipe) => (
+            {recipes.map((recipe) => (
             <article key={recipe.idMeal}>
             <h2>{recipe.strMeal}</h2>
             <img src={recipe.strMealThumb} alt={recipe.strMeal} />
